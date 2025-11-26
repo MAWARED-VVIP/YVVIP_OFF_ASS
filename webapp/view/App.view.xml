@@ -1,0 +1,9 @@
+<mvc:View controllerName="com.adlsa.vvip.off.assg.controller.App"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.f">
+    <FlexibleColumnLayout
+		id="flexibleColumnLayout"
+		stateChange=".onStateChanged"
+		backgroundDesign="Solid"
+		layout="{layoutModel>/layout}"/>
+</mvc:View>

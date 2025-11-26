@@ -1,0 +1,182 @@
+<mvc:View
+    controllerName="com.adlsa.vvip.off.assg.controller.Overview"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns:ui="sap.ui.table"
+    xmlns:unified="sap.ui.unified"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:tnt="sap.tnt"
+>
+    <App>
+        <pages>
+            <Page>
+                <f:DynamicPage busy="{detailView>/busy}">
+                    <f:title>
+                        <f:DynamicPageTitle>
+                            <f:heading>
+                                <MessageStrip visible="{layoutModel>/onBehalfEnable}" text="{layoutModel>/messageText}" showIcon="true" type="Warning"/>
+                            </f:heading>
+                            <!-- <f:expandedContent>
+                        <Label
+                            id="expandedLabel"
+                            text="No filters active"
+                        />
+                    </f:expandedContent>
+                    <f:snappedContent>
+                        <Label
+                            id="snappedLabel"
+                            text="No filters active"
+                        />
+                    </f:snappedContent> -->
+                        </f:DynamicPageTitle>
+                    </f:title>
+                    <f:header>
+                        <f:DynamicPageHeader class="customHeaderBackground">
+                            <f:content>
+                                <l:VerticalLayout
+                                    id="_IDGenVerticalLayout1"
+                                    width="100%"
+                                >
+                                    <!-- <fb:FilterBar
+                                        id="_IDGenFilterBar1"
+                                        showGoOnFB="true"
+                                        search=".onSearch"
+                                    >
+                                        <fb:filterGroupItems>
+                                            <fb:FilterGroupItem
+                                                groupName="__$INTERNAL$"
+                                                name="A"
+                                                label="{i18n>RequestNo}"
+                                                partOfCurrentVariant="true"
+                                                visibleInFilterBar="true"
+                                                mandatory="true"
+                                            >
+                                                <fb:control>
+                                                    <Input
+                                                        value="{path:'detailView>/RequestNo' , type : 'sap.ui.model.type.String', constraints: {maxLength: 8}}"
+                                                    />
+                                                </fb:control>
+                                            </fb:FilterGroupItem>
+                                            <fb:FilterGroupItem
+                                                groupName="__$INTERNAL$"
+                                                name="B"
+                                                label="{i18n>KawaderResponseId}"
+                                                labelTooltip="{i18n>KawaderResponseId}"
+                                                mandatory="true"
+                                                partOfCurrentVariant="true"
+                                                visibleInFilterBar="true"
+                                            >
+                                                <fb:control>
+                                                    <Input
+                                                        value="{path:'detailView>/KawaderResponseId', type : 'sap.ui.model.type.String', constraints: {maxLength: 9}}"
+                                                    />
+                                                </fb:control>
+                                            </fb:FilterGroupItem>
+                                            <fb:FilterGroupItem
+                                                groupName="__$INTERNAL$"
+                                                name="C"
+                                                label="{i18n>Status}"
+                                                labelTooltip="{i18n>Status}"
+                                                partOfCurrentVariant="true"
+                                                visibleInFilterBar="true"
+                                            >
+                                                <fb:control>
+                                                    <Select
+                                                        items="{/RequestStatusSet}"
+                                                        selectedKey="{detailView>/ReqStatus}"
+                                                        forceSelection="false"
+                                                        wrapItemsText="true"
+                                                    >
+                                                        <items>
+                                                            <core:ListItem
+                                                                key="{DomvalueL}"
+                                                                text="{Ddtext}"
+                                                                additionalText="{DomvalueL}"
+                                                            />
+                                                        </items>
+                                                    </Select>
+                                                </fb:control>
+                                            </fb:FilterGroupItem>
+                                        </fb:filterGroupItems>
+                                    </fb:FilterBar> -->
+                                </l:VerticalLayout>
+                            </f:content>
+                        </f:DynamicPageHeader>
+                    </f:header>
+                    <f:content>
+                        <Table
+                            items="{/EmpRequestSet}"
+                            id="idOfficialAssignmentTable"
+                            alternateRowColors="true"
+                            backgroundDesign="Solid"
+                            busyIndicatorDelay="1000"
+
+                        >
+                            <headerToolbar>
+                                <OverflowToolbar>
+                                    <content>
+                                        <ToolbarSpacer />
+                                        <Button
+                                            text="{i18n>Request} {= ${layoutModel>/sOfficialAssignmentType} === 'OfficialAssignmentApproved' ? ${i18n>Official_Assignment_approval} : ${i18n>Official_Assignment_Allowance}}"
+                                            icon="sap-icon://add"
+                                            press="onCreatePressed"
+                                            type="Emphasized"
+                                        />
+                                    </content>
+                                </OverflowToolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column>
+                                    <Label text="{i18n>ReqNo}" />
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet" demandPopin="true"
+                                >
+                                    <Label text="{i18n>Begda}" />
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet" demandPopin="true"
+                                >
+                                    <Label text="{i18n>Endda}" />
+                                </Column>
+                                <Column  minScreenWidth="Tablet" demandPopin="true">
+                                    <Label text="{i18n>ReqDays}" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Label text="{i18n>ReqStat}" />
+                                </Column>
+                                 <Column hAlign="End">
+                                    <Label text="{i18n>Enablecancel}" />
+                                </Column>
+                                
+                                 
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                        <ObjectIdentifier
+                                            title="{= Number(${ReqNo})}"
+                                            
+                                        />
+                                        <Text text="{path: 'Begda'  , type : 'sap.ui.model.type.Date', formatOptions : { pattern: 'dd.MM.yyyy', strictParsing: false , UTC: true }}" />
+                                        <Text text="{path: 'Endda'  , type : 'sap.ui.model.type.Date', formatOptions : { pattern: 'dd.MM.yyyy', strictParsing: false , UTC: true }}" />
+                                        <!-- <Text text="{ReqStat}" /> -->
+                                        <ObjectNumber number="{= Number(${ReqDays})}" state="Success"/>
+                                        <ObjectStatus text="{ReqStatTxt}" state="{= ${ReqStat} === 'APPROVED' ? 'Success' : 'Information'}"/>
+                                        <Button icon="sap-icon://delete" enabled="{= ${Enablecancel}}" press="onOfficialItemDeletePressed"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </f:content>
+                </f:DynamicPage>
+            </Page>
+        </pages>
+    </App>
+</mvc:View>

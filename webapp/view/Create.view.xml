@@ -1,0 +1,168 @@
+<mvc:View
+    controllerName="com.adlsa.vvip.off.assg.controller.Create"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+    xmlns:f="sap.f"
+    xmlns:upload="sap.m.upload"
+>
+    <App>
+        <pages>
+            <Page busy="{detailView>/busy}">
+                <content>
+                   
+                    <uxap:ObjectPageLayout>
+                    <uxap:headerContent>
+                        <FlexBox wrap="Wrap">
+                            <l:VerticalLayout >
+                                    <MessageStrip visible="{layoutModel>/onBehalfEnable}" text="{layoutModel>/messageText}" showIcon="true" type="Warning"/>
+                            </l:VerticalLayout>
+                        </FlexBox>
+                    </uxap:headerContent>
+                        <uxap:sections>
+                            <uxap:ObjectPageSection title="{i18n>Request}">
+                                <uxap:subSections>
+                                    <uxap:ObjectPageSubSection>
+                                        <uxap:blocks>
+                                            <form:SimpleForm
+                                                id="SimpleFormChange354"
+                                                editable="true"
+                                                layout="ResponsiveGridLayout"
+                                                title="{i18n>SUBMITION_FORM}"
+                                                labelSpanXL="3"
+                                                labelSpanL="3"
+                                                labelSpanM="3"
+                                                labelSpanS="12"
+                                                adjustLabelSpan="false"
+                                                emptySpanXL="4"
+                                                emptySpanL="4"
+                                                emptySpanM="4"
+                                                emptySpanS="0"
+                                                columnsXL="1"
+                                                columnsL="1"
+                                                columnsM="1"
+                                                singleContainerFullSize="false"
+                                            >
+                                                <form:content>
+                                                    <Label
+                                                        text="{i18n>Begda}"
+                                                        design="Bold"
+                                                        required="true"
+                                                    />
+                                                    <DatePicker
+                                                    id="startDate"
+                                                    change="handleCreateChange"
+                                                        navigate="onCalendarNavigate"
+                                                        value="{path: 'detailView>/Begda' , type : 'sap.ui.model.type.Date', formatOptions : { pattern: 'dd.MM.yyyy', strictParsing: false , UTC: true }}"
+                                                    />
+                                                    <Label
+                                                        text="{i18n>Endda}"
+                                                        design="Bold"
+                                                        required="true"
+                                                    />
+                                                    <DatePicker
+                                                    id="endDate"
+                                                    change="handleCreateChange"
+                                                    navigate="onCalendarNavigate"
+                                                        value="{path: 'detailView>/Endda' , type : 'sap.ui.model.type.Date', formatOptions : { pattern: 'dd.MM.yyyy', strictParsing: false , UTC: true }}"
+                                                    />
+
+                                                    <Label
+                                                        text="{i18n>Comments}"
+                                                        design="Bold"
+                                                    />
+                                                    <TextArea
+                                                        rows="5"
+                                                        maxLength="150"
+                                                        value="{detailView>/Comments}"
+                                                    />
+                                                    <Label  design="Bold"
+                                                        text="{i18n>ReqDays}" visible="{= ${detailView>/AllowanceValue/ReqDays}.length > 0}"
+                                                    />
+                                                    <Text text="{= Number(${detailView>/AllowanceValue/ReqDays})}" visible="{= ${detailView>/AllowanceValue/ReqDays}.length > 0}"/>
+                                                    <Label  design="Bold"
+                                                        text="{i18n>Allowance_Amount}" visible="{= ${detailView>/AllowanceValue/AllowanceAmt}.length > 0}"
+                                                    />
+                                                    <Text text="{detailView>/AllowanceValue/AllowanceAmt}" visible="{= ${detailView>/AllowanceValue/AllowanceAmt}.length > 0}"/>
+                                                    
+                                                    <!-- <Label
+                                                        text="{i18n>MNG_APR}"
+                                                        design="Bold"
+                                                        required="true"
+                                                    />
+                                                    <CheckBox
+                                                        selected="{detailView>/IsMgrAppr}"
+                                                    /> -->
+                                                </form:content>
+                                            </form:SimpleForm>
+                                        </uxap:blocks>
+                                    </uxap:ObjectPageSubSection>
+                                </uxap:subSections>
+                            </uxap:ObjectPageSection>
+                            <uxap:ObjectPageSection title="{i18n>Attachment}">
+                                <uxap:subSections>
+                                    <uxap:ObjectPageSubSection
+                                        id="subSectionAttachment"
+                                        
+                                    >
+                                        <uxap:blocks>
+                                            <VBox>
+                                                <!-- <MessageStrip
+                                                    text="{i18n>ATTACHMENT_MANDATORY}"
+                                                    showIcon="true"
+                                                    showCloseButton="false"
+                                                    type="Information"
+                                                    class="sapUiMediumMarginBottom"
+                                                /> -->
+                                                <upload:UploadSet
+                                                    id="idAttachmentOffcialAssignment"
+                                                    instantUpload="false"
+                                                    multiple="false"
+                                                    afterItemAdded="onAfterAttachmentItemAdded"
+                                                    afterItemRemoved="onAfterAttachmentItemRemoved"
+                                                >
+                                                <upload:toolbar>
+                                            <OverflowToolbar>
+                                                <Label design="Bold"
+                                                    text="{i18n>ATTACHMENT_MANDATORY}" required="true"
+                                                />
+                                                <ToolbarSpacer />
+                                               
+                                            </OverflowToolbar>
+                                        </upload:toolbar>
+                                                </upload:UploadSet>
+                                            </VBox>
+                                        </uxap:blocks>
+                                    </uxap:ObjectPageSubSection>
+                                </uxap:subSections>
+                            </uxap:ObjectPageSection>
+                        </uxap:sections>
+                    </uxap:ObjectPageLayout>
+                </content>
+                <footer>
+                    <OverflowToolbar id="ifFooterForPage">
+                        <ToolbarSpacer id="_IDGenToolbarSpacer3" />
+                        <Button
+                            id="footerButtonCreateId"
+                            text="{i18n>Create}"
+                            type="Accept"
+                            press="onCreatePress"
+                        />
+                        <Button
+                            id="idResetButton"
+                            text="{i18n>Reset}"
+                            class="glare-button"
+                            type="Negative"
+                            press="onResetPressed"
+                        />
+                    </OverflowToolbar>
+                </footer>
+            </Page>
+        </pages>
+    </App>
+</mvc:View>
