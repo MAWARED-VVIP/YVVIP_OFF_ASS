@@ -151,6 +151,9 @@
                                 <Column minScreenWidth="Tablet" demandPopin="true">
                                     <Label text="{i18n>ReqStat}" />
                                 </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Label text="{i18n>Allowance_Amount}" />
+                                </Column>
                                  <Column hAlign="End">
                                     <Label text="{i18n>Enablecancel}" />
                                 </Column>
@@ -169,6 +172,8 @@
                                         <!-- <Text text="{ReqStat}" /> -->
                                         <ObjectNumber number="{= Number(${ReqDays})}" state="Success"/>
                                         <ObjectStatus text="{ReqStatTxt}" state="{= ${ReqStat} === 'APPROVED' ? 'Success' : 'Information'}"/>
+                                        <Text text="{= Number(${AllowanceAmt})}"
+                                            />
                                         <Button icon="sap-icon://delete" enabled="{= ${Enablecancel}}" press="onOfficialItemDeletePressed"/>
                                     </cells>
                                 </ColumnListItem>

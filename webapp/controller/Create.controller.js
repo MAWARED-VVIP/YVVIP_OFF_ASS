@@ -43,20 +43,44 @@ sap.ui.define([
 			if (oStartDate && oEndDate) {
 				var start = new Date(oStartDate.getFullYear(), oStartDate.getMonth(), oStartDate.getDate());
 				var end = new Date(oEndDate.getFullYear(), oEndDate.getMonth(), oEndDate.getDate());
-				if (end < start) {
-					oEvent.getSource().setValue("");
-					oDateTimePickerStart.setValueState(ValueState.Error);
-					oDateTimePickerEnd.setValueState(ValueState.Error);
-					oDateTimePickerStart.setValueStateText(sValueStateText);
-					oDateTimePickerEnd.setValueStateText(sValueStateText);
-				} else {
+				if (oEvent.getParameter("id").includes("startDate")) {
 					oDateTimePickerStart.setValueState(ValueState.None);
 					oDateTimePickerEnd.setValueState(ValueState.None);
-					if (oStartDate && oEndDate) {
+					oDateTimePickerEnd.setDateValue(oStartDate);
+					this._callAllowanceValue(oStartDate, oStartDate);
+				} else {
+					if (end < start) {
+						oEvent.getSource().setValue("");
+						oDateTimePickerStart.setValueState(ValueState.Error);
+						oDateTimePickerEnd.setValueState(ValueState.Error);
+						oDateTimePickerStart.setValueStateText(sValueStateText);
+						oDateTimePickerEnd.setValueStateText(sValueStateText);
+					} else {
+						oDateTimePickerStart.setValueState(ValueState.None);
+						oDateTimePickerEnd.setValueState(ValueState.None);
 						this._callAllowanceValue(oStartDate, oEndDate);
 					}
 
 				}
+				// if (end < start) {
+				// 	oEvent.getSource().setValue("");
+				// 	oDateTimePickerStart.setValueState(ValueState.Error);
+				// 	oDateTimePickerEnd.setValueState(ValueState.Error);
+				// 	oDateTimePickerStart.setValueStateText(sValueStateText);
+				// 	oDateTimePickerEnd.setValueStateText(sValueStateText);
+				// } else {
+				// 	oDateTimePickerStart.setValueState(ValueState.None);
+				// 	oDateTimePickerEnd.setValueState(ValueState.None);
+				// 	if( oEvent.getParameter("id").includes("startDate")){
+
+				// 	}else{
+				// 		this._callAllowanceValue(oStartDate, oEndDate);
+				// 	}
+				// 	// if (oStartDate && oEndDate) {
+
+				// 	// }
+
+				// }
 			}
 
 		},

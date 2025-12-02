@@ -178,7 +178,13 @@ sap.ui.define([
 			}.bind(this));
 		},
 		onOfficialItemDeletePressed: function(oEvent){
-			
+			MessageBox.error(this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("DELETE_SUCCESFUL"),{
+				onClose : function(oEvent){
+
+				}
+			});
+
+			return;
 			var oConext = oEvent.getSource().getBindingContext().getObject(),
 				oModel = this.getView().getModel();
 			
